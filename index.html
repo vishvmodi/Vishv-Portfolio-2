@@ -18,15 +18,28 @@
         ::-webkit-scrollbar-track { background: #000; }
         ::-webkit-scrollbar-thumb { background: #dc2626; border-radius: 10px; }
 
-        /* BASE STYLES - Cursor set to default */
+        /* BASE STYLES */
         * { cursor: default; }
-        a, button, [onclick] { cursor: pointer; }
+        a, button, [onclick] { cursor: pointer !important; }
         
         img, video { pointer-events: none; -webkit-user-drag: none; }
         body { background-color: #000; color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         .heading-font { font-family: 'Archivo Black', sans-serif; }
+        
+        /* CYBERCUT CLIPPING */
         .cyber-cut { clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px); }
-        .cyber-button { clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .cyber-button { 
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%); 
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 80px;
+            width: 100%;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
         
         /* BACKGROUND MESH */
         .grid-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
@@ -47,8 +60,8 @@
     </div>
 
     <nav class="fixed w-full z-50 px-8 py-6 flex justify-between items-center backdrop-blur-md border-b border-red-900/10">
-        <button onclick="scrollToSection('#top')" class="heading-font text-2xl tracking-tighter uppercase group">
-            VISHV <span class="text-red-600 group-hover:text-white transition">MODI</span>
+        <button onclick="scrollToSection('#top')" class="p-2 bg-red-600/10 border border-red-600/20 hover:bg-red-600 hover:text-white transition-all duration-300 cyber-cut flex items-center justify-center group">
+            <i data-lucide="home" class="w-6 h-6 text-red-600 group-hover:text-white transition-colors"></i>
         </button>
         <div class="hidden md:flex gap-8 text-[10px] tracking-[0.3em] font-bold uppercase">
             <button onclick="scrollToSection('#work')" class="hover:text-red-600 transition">Process</button>
@@ -62,7 +75,7 @@
             <div class="lg:col-span-5 order-2 lg:order-1 reveal">
                 <div class="cyber-cut bg-red-600 p-[1px]">
                     <div class="cyber-cut bg-black overflow-hidden aspect-[4/5]">
-                        <img src="hero.jpeg" alt="Vishv Modi" class="w-full h-full object-cover transition duration-700">
+                        <img src="hero.jpeg" alt="Vishv Modi" class="w-full h-full object-cover">
                     </div>
                 </div>
             </div>
@@ -73,7 +86,7 @@
                 <p class="text-gray-400 text-lg max-w-lg mb-10 leading-relaxed uppercase tracking-tighter">
                     Crafting high-octane gaming edits and viral thumbnails for the next generation of creators.
                 </p>
-                <button onclick="scrollToSection('#work')" class="cyber-button bg-red-600 text-white font-black px-10 py-5 tracking-widest uppercase hover:bg-white hover:text-black">
+                <button onclick="scrollToSection('#contact')" class="cyber-button bg-red-600 text-white font-black px-10 py-5 tracking-widest uppercase hover:bg-white hover:text-black">
                     Start Project
                 </button>
             </div>
@@ -82,18 +95,15 @@
 
     <section id="work" class="py-32 px-8 reveal">
         <div class="container mx-auto max-w-6xl">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-l-4 border-red-600 pl-6">
-                <div>
-                    <p class="text-red-600 tracking-widest text-xs uppercase mb-2">Process Showcase</p>
-                    <h2 class="heading-font text-4xl uppercase">Before vs After</h2>
-                </div>
+            <div class="mb-12 border-l-4 border-red-600 pl-6">
+                <p class="text-red-600 tracking-widest text-xs uppercase mb-2">Process Showcase</p>
+                <h2 class="heading-font text-4xl uppercase">Before vs After</h2>
             </div>
-
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="relative group">
                     <div class="absolute top-4 left-4 z-10 bg-black/80 px-4 py-1 text-xs font-bold tracking-widest uppercase border border-white/20">Raw Footage</div>
-                    <div class="cyber-cut bg-zinc-900 overflow-hidden aspect-video border border-white/5">
-                        <video class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500" autoplay muted loop playsinline>
+                    <div class="cyber-cut bg-zinc-900 overflow-hidden aspect-video">
+                        <video class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" autoplay muted loop playsinline>
                             <source src="before.mp4" type="video/mp4">
                         </video>
                     </div>
@@ -138,9 +148,21 @@
 
     <section id="contact" class="py-40 px-8 text-center reveal">
         <h2 class="heading-font text-5xl md:text-8xl mb-12 uppercase">GET IN <br> TOUCH</h2>
-        <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
-            <a href="mailto:mvishv6@gmail.com" class="cyber-button bg-white text-black px-12 py-6 font-black text-xl hover:bg-red-600 hover:text-white transition w-80 text-center">GMAIL</a>
-            <a href="https://www.instagram.com/vishv_playz" target="_blank" class="cyber-button bg-red-600 text-white px-12 py-6 font-black text-xl hover:bg-white hover:text-black transition w-80 text-center">INSTAGRAM</a>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto px-4">
+            
+            <a href="mailto:mvishv6@gmail.com" class="cyber-button bg-white text-black hover:bg-red-600 hover:text-white">
+                GMAIL
+            </a>
+
+            <a href="http://www.fiverr.com/s/1qZZbz0" target="_blank" class="cyber-button bg-[#1dbf73] text-black border-2 border-[#1dbf73] hover:bg-black hover:text-white hover:shadow-[0_0_20px_rgba(29,191,115,0.5)]">
+                FIVERR
+            </a>
+
+            <a href="https://www.instagram.com/vishv_playz" target="_blank" class="cyber-button bg-red-600 text-white hover:bg-white hover:text-black">
+                INSTAGRAM
+            </a>
+
         </div>
     </section>
 
@@ -148,9 +170,9 @@
         lucide.createIcons();
         gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-        // SCROLL REVEAL
+        // SCROLL REVEAL ANIMATIONS
         gsap.utils.toArray(".reveal").forEach(el => {
-            gsap.to(el, { scrollTrigger: { trigger: el, start: "top 90%" }, opacity: 1, y: 0, duration: 1.2, ease: "power3.out" });
+            gsap.to(el, { scrollTrigger: { trigger: el, start: "top 90%" }, opacity: 1, y: 0, duration: 1, ease: "power2.out" });
         });
 
         function scrollToSection(id) { gsap.to(window, { duration: 1, scrollTo: id, ease: "power4.inOut" }); }
