@@ -4,139 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vishv Modi | Video Editor & Designer</title>
+    <meta name="description" content="Portfolio of Vishv Modi - Professional Video Editor & Thumbnail Designer.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    
     <style>
-        /* SECURITY: PREVENT SELECTION & DRAGGING */
-        * { -webkit-user-select: none; -webkit-touch-callout: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
-        img { pointer-events: none; -webkit-user-drag: none; }
+        /* CUSTOM SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #dc2626; border-radius: 10px; }
+
+        /* BASE STYLES - Cursor set to default */
+        * { cursor: default; }
+        a, button, [onclick] { cursor: pointer; }
         
+        img, video { pointer-events: none; -webkit-user-drag: none; }
         body { background-color: #000; color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         .heading-font { font-family: 'Archivo Black', sans-serif; }
         .cyber-cut { clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px); }
         .cyber-button { clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         
-        /* BACKGROUND ANIMATION */
-        .grid-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background-color: #000; }
-        .grid-mesh { position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background-image: linear-gradient(to right, rgba(255, 0, 0, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 0, 0, 0.08) 1px, transparent 1px); background-size: 60px 60px; transform: rotateX(50deg); animation: moveMesh 20s linear infinite; }
-        @keyframes moveMesh { from { transform: rotateX(50deg) translateY(0); } to { transform: rotateX(50deg) translateY(60px); } }
-        
-        /* LIGHTBOX & WATERMARK */
-        #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 100; align-items: center; justify-content: center; backdrop-filter: blur(15px); }
-        .lightbox-container { position: relative; max-width: 90%; max-height: 80%; }
-        .watermark-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-family: 'Archivo Black', sans-serif; font-size: 5vw; color: rgba(255, 255, 255, 0.15); white-space: nowrap; pointer-events: none; z-index: 10; text-transform: uppercase; letter-spacing: 0.3em; }
-        #lightbox-img { width: 100%; height: auto; border: 1px solid rgba(255, 0, 0, 0.3); }
+        /* BACKGROUND MESH */
+        .grid-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .grid-mesh { position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background-image: linear-gradient(to right, rgba(220, 38, 38, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(220, 38, 38, 0.05) 1px, transparent 1px); background-size: 50px 50px; transform: rotateX(50deg); animation: moveMesh 20s linear infinite; }
+        @keyframes moveMesh { from { transform: rotateX(50deg) translateY(0); } to { transform: rotateX(50deg) translateY(50px); } }
 
-        .reveal { opacity: 0; transform: translateY(40px); }
-        html { scroll-behavior: smooth; }
+        /* REVEAL ANIMATION */
+        .reveal { opacity: 0; transform: translateY(30px); }
+        #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 100; align-items: center; justify-content: center; backdrop-filter: blur(20px); }
     </style>
 </head>
-<body oncontextmenu="return false;">
+<body>
 
     <div class="grid-container"><div class="grid-mesh"></div></div>
 
     <div id="lightbox" onclick="closeLightbox()">
-        <button class="absolute top-10 right-10 text-white hover:text-red-600 transition z-[110]">
-            <i data-lucide="x" class="w-10 h-10"></i>
-        </button>
-        <div class="lightbox-container" id="lb-cont">
-            <div class="watermark-overlay">© VISHV MODI</div>
-            <img id="lightbox-img" src="" alt="" class="cyber-cut">
-        </div>
+        <img id="lightbox-img" src="" class="cyber-cut max-w-[85%] max-height-[80%] border border-red-600/30 shadow-2xl">
     </div>
 
-    <nav class="fixed w-full z-50 px-8 py-6 flex justify-between items-center backdrop-blur-lg border-b border-red-900/20 text-white">
-        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="heading-font text-2xl tracking-tighter uppercase group">
+    <nav class="fixed w-full z-50 px-8 py-6 flex justify-between items-center backdrop-blur-md border-b border-red-900/10">
+        <button onclick="scrollToSection('#top')" class="heading-font text-2xl tracking-tighter uppercase group">
             VISHV <span class="text-red-600 group-hover:text-white transition">MODI</span>
         </button>
-        <div class="hidden md:flex gap-10 text-[11px] tracking-[0.2em] font-bold uppercase">
-            <button onclick="scrollToSection('#work')" class="hover:text-red-500 transition">Showreel</button>
-            <button onclick="scrollToSection('#insta')" class="hover:text-red-500 transition">Insta Edits</button>
-            <button onclick="scrollToSection('#thumbnails')" class="hover:text-red-500 transition">Thumbnails</button>
-            <button onclick="scrollToSection('#contact')" class="hover:text-red-500 transition">Contact</button>
+        <div class="hidden md:flex gap-8 text-[10px] tracking-[0.3em] font-bold uppercase">
+            <button onclick="scrollToSection('#work')" class="hover:text-red-600 transition">Process</button>
+            <button onclick="scrollToSection('#thumbnails')" class="hover:text-red-600 transition">Thumbnails</button>
+            <button onclick="scrollToSection('#contact')" class="text-red-600">Hire Me</button>
         </div>
     </nav>
 
-    <header class="min-h-screen flex items-center px-8 lg:px-24 pt-16">
+    <header id="top" class="min-h-screen flex items-center px-8 lg:px-24">
         <div class="container mx-auto grid lg:grid-cols-12 gap-12 items-center">
-            <div id="hero-image" class="lg:col-span-5 order-2 lg:order-1 relative">
-                <div class="cyber-cut bg-red-600 p-[1.5px]">
-                    <div class="cyber-cut bg-[#050505] overflow-hidden aspect-[4/5]">
-                        <img src="hero.jpeg" alt="Vishv Modi" class="w-full h-full object-cover">
+            <div class="lg:col-span-5 order-2 lg:order-1 reveal">
+                <div class="cyber-cut bg-red-600 p-[1px]">
+                    <div class="cyber-cut bg-black overflow-hidden aspect-[4/5]">
+                        <img src="hero.jpeg" alt="Vishv Modi" class="w-full h-full object-cover transition duration-700">
                     </div>
                 </div>
             </div>
-            <div id="hero-text" class="lg:col-span-7 order-1 lg:order-2">
-                <p class="text-red-600 font-semibold tracking-[0.4em] mb-4 uppercase text-xs">Editor & Designer</p>
-                <h1 class="heading-font text-6xl lg:text-[90px] leading-[0.9] mb-8 uppercase">VISHV <br> <span class="text-red-600">MODI.</span></h1>
-                <p class="text-gray-300 text-lg lg:text-xl max-w-xl mb-12">Passionate video editor focused on gaming content, short-form storytelling, and high-impact YouTube edits.</p>
-                <button onclick="scrollToSection('#work')" class="cyber-button bg-red-600 text-white font-black px-12 py-5 tracking-widest uppercase hover:bg-red-700">Explore Portfolio</button>
+            <div class="lg:col-span-7 order-1 lg:order-2">
+                <h1 class="heading-font text-6xl lg:text-9xl leading-none mb-6 uppercase">
+                    VISUAL <br> <span class="text-red-600">EDITOR.</span>
+                </h1>
+                <p class="text-gray-400 text-lg max-w-lg mb-10 leading-relaxed uppercase tracking-tighter">
+                    Crafting high-octane gaming edits and viral thumbnails for the next generation of creators.
+                </p>
+                <button onclick="scrollToSection('#work')" class="cyber-button bg-red-600 text-white font-black px-10 py-5 tracking-widest uppercase hover:bg-white hover:text-black">
+                    Start Project
+                </button>
             </div>
         </div>
     </header>
 
-    <section id="work" class="py-24 px-8 bg-red-950/10 reveal">
-        <div class="container mx-auto text-center max-w-5xl">
-            <h2 class="heading-font text-4xl mb-4 uppercase">My Showreel</h2>
-            <p class="text-gray-400 mb-12">The best of my editing projects.</p>
-            <a href="https://www.youtube.com/watch?v=VT_Tmu59c4w" target="_blank" class="block group relative cyber-cut overflow-hidden shadow-2xl border border-red-600/20">
-                <div class="aspect-video relative">
-                    <img src="https://img.youtube.com/vi/VT_Tmu59c4w/maxresdefault.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-red-900/40 transition-all">
-                        <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mb-4">
-                            <i data-lucide="play" class="text-white fill-white w-8 h-8"></i>
-                        </div>
-                        <p class="heading-font text-xl uppercase tracking-widest text-white">Watch Now</p>
+    <section id="work" class="py-32 px-8 reveal">
+        <div class="container mx-auto max-w-6xl">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-l-4 border-red-600 pl-6">
+                <div>
+                    <p class="text-red-600 tracking-widest text-xs uppercase mb-2">Process Showcase</p>
+                    <h2 class="heading-font text-4xl uppercase">Before vs After</h2>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="relative group">
+                    <div class="absolute top-4 left-4 z-10 bg-black/80 px-4 py-1 text-xs font-bold tracking-widest uppercase border border-white/20">Raw Footage</div>
+                    <div class="cyber-cut bg-zinc-900 overflow-hidden aspect-video border border-white/5">
+                        <video class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500" autoplay muted loop playsinline>
+                            <source src="before.mp4" type="video/mp4">
+                        </video>
                     </div>
                 </div>
-            </a>
-        </div>
-    </section>
-
-    <section id="insta" class="py-24 px-8 bg-black reveal">
-        <div class="container mx-auto text-center max-w-6xl">
-            <h2 class="heading-font text-4xl mb-12 uppercase">Instagram Edits</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <a href="https://www.instagram.com/reel/DTpyXNEDUDd/?igsh=aG5jZXUwZzBjNDJy" target="_blank" class="block group relative cyber-cut overflow-hidden border border-white/10">
-                    <div class="aspect-video relative bg-zinc-900 flex flex-col items-center justify-center">
-                        <i data-lucide="instagram" class="text-red-600 w-12 h-12 mb-4 group-hover:scale-110 transition-transform"></i>
-                        <p class="heading-font text-lg uppercase">Gaming Reel #1</p>
+                <div class="relative group">
+                    <div class="absolute top-4 left-4 z-10 bg-red-600 px-4 py-1 text-xs font-bold tracking-widest uppercase shadow-lg">Final Edit</div>
+                    <div class="cyber-cut bg-zinc-900 overflow-hidden aspect-video border border-red-600/30">
+                        <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+                            <source src="after.mp4" type="video/mp4">
+                        </video>
                     </div>
-                </a>
-                <a href="https://www.instagram.com/reel/DRJLQhlDKhz/?igsh=eWR2cmN5dmY3OWl3" target="_blank" class="block group relative cyber-cut overflow-hidden border border-white/10">
-                    <div class="aspect-video relative bg-zinc-900 flex flex-col items-center justify-center">
-                        <i data-lucide="instagram" class="text-red-600 w-12 h-12 mb-4 group-hover:scale-110 transition-transform"></i>
-                        <p class="heading-font text-lg uppercase">Short-Form Content #2</p>
-                    </div>
-                </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="thumbnails" class="py-24 px-8 bg-zinc-950/50 reveal">
+    <section id="thumbnails" class="py-32 px-8 reveal">
         <div class="container mx-auto max-w-6xl text-center">
-            <h2 class="heading-font text-4xl mb-12 uppercase">Thumbnail Designs</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="cyber-cut border border-white/10 overflow-hidden group cursor-zoom-in relative" onclick="openLightbox('thumb1.jpg')">
-                    <img src="thumb1.jpg" class="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-red-600/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <i data-lucide="maximize-2" class="text-white w-8 h-8"></i>
+            <h2 class="heading-font text-3xl mb-16 uppercase italic border-b border-red-600 pb-4 inline-block">Visual Identity</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="cyber-cut overflow-hidden group relative" onclick="openLightbox('thumb1.jpg')">
+                    <img src="thumb1.jpg" class="w-full aspect-video object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-red-600/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <i data-lucide="maximize" class="text-white"></i>
                     </div>
                 </div>
-                <div class="cyber-cut border border-white/10 overflow-hidden group cursor-zoom-in relative" onclick="openLightbox('thumb2.jpg')">
-                    <img src="thumb2.jpg" class="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-red-600/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <i data-lucide="maximize-2" class="text-white w-8 h-8"></i>
+                <div class="cyber-cut overflow-hidden group relative" onclick="openLightbox('thumb2.jpg')">
+                    <img src="thumb2.jpg" class="w-full aspect-video object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-red-600/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <i data-lucide="maximize" class="text-white"></i>
                     </div>
                 </div>
-                <div class="cyber-cut border border-white/10 overflow-hidden group cursor-zoom-in relative" onclick="openLightbox('thumb3.jpg')">
-                    <img src="thumb3.jpg" class="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-red-600/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <i data-lucide="maximize-2" class="text-white w-8 h-8"></i>
+                <div class="cyber-cut overflow-hidden group relative" onclick="openLightbox('thumb3.jpg')">
+                    <img src="thumb3.jpg" class="w-full aspect-video object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-red-600/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <i data-lucide="maximize" class="text-white"></i>
                     </div>
                 </div>
             </div>
@@ -144,54 +137,25 @@
     </section>
 
     <section id="contact" class="py-40 px-8 text-center reveal">
-        <h2 class="heading-font text-5xl md:text-7xl mb-6 uppercase">Get In <br>Touch</br></h2>
-        <div class="flex flex-col md:flex-row gap-6 justify-center items-center mt-12">
-            <a href="mailto:mvishv6@gmail.com" class="cyber-button bg-white text-black px-12 py-6 font-black text-xl uppercase hover:bg-red-600 hover:text-white transition-all w-72 justify-center flex items-center gap-3">
-                <i data-lucide="mail"></i> Gmail
-            </a>
-            <a href="https://www.instagram.com/vishv_playz" target="_blank" class="cyber-button bg-red-600 text-white px-12 py-6 font-black text-xl uppercase hover:bg-white hover:text-black transition-all w-72 justify-center flex items-center gap-3">
-                <i data-lucide="instagram"></i> Instagram
-            </a>
+        <h2 class="heading-font text-5xl md:text-8xl mb-12 uppercase">GET IN <br> TOUCH</h2>
+        <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+            <a href="mailto:mvishv6@gmail.com" class="cyber-button bg-white text-black px-12 py-6 font-black text-xl hover:bg-red-600 hover:text-white transition w-80 text-center">GMAIL</a>
+            <a href="https://www.instagram.com/vishv_playz" target="_blank" class="cyber-button bg-red-600 text-white px-12 py-6 font-black text-xl hover:bg-white hover:text-black transition w-80 text-center">INSTAGRAM</a>
         </div>
     </section>
-
-    <footer class="py-12 border-t border-white/5 text-center text-gray-500 text-[10px] tracking-widest uppercase">
-        <p>© Vishv Modi — All Content Protected</p>
-    </footer>
 
     <script>
         lucide.createIcons();
         gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-        
-        function scrollToSection(id) { gsap.to(window, { duration: 1.2, scrollTo: id, ease: "power4.inOut" }); }
 
-        function openLightbox(src) {
-            document.getElementById('lightbox-img').src = src;
-            document.getElementById('lightbox').style.display = 'flex';
-            gsap.fromTo("#lightbox", {opacity: 0}, {opacity: 1, duration: 0.3});
-            gsap.fromTo("#lb-cont", {scale: 0.8, opacity: 0}, {scale: 1, opacity: 1, duration: 0.5, ease: "expo.out"});
-        }
+        // SCROLL REVEAL
+        gsap.utils.toArray(".reveal").forEach(el => {
+            gsap.to(el, { scrollTrigger: { trigger: el, start: "top 90%" }, opacity: 1, y: 0, duration: 1.2, ease: "power3.out" });
+        });
 
-        function closeLightbox() {
-            gsap.to("#lightbox", {opacity: 0, duration: 0.3, onComplete: () => {
-                document.getElementById('lightbox').style.display = 'none';
-            }});
-        }
-
-        // KEYBOARD SECURITY
-        document.onkeydown = function(e) {
-            if (e.keyCode === 123) return false; // F12
-            if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 73)) return false; // Ctrl+U, S, I
-        };
-
-        window.onload = () => {
-            gsap.from("#hero-image", { scale: 0.8, opacity: 0, duration: 1.5, ease: "expo.out" });
-            gsap.from("#hero-text", { x: 50, opacity: 0, duration: 1.2, delay: 0.3 });
-            gsap.utils.toArray(".reveal").forEach(el => {
-                gsap.to(el, { scrollTrigger: { trigger: el, start: "top 85%" }, opacity: 1, y: 0, duration: 1 });
-            });
-        };
+        function scrollToSection(id) { gsap.to(window, { duration: 1, scrollTo: id, ease: "power4.inOut" }); }
+        function openLightbox(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').style.display = 'flex'; }
+        function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
     </script>
 </body>
 </html>
-
