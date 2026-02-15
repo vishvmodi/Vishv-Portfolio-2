@@ -4,182 +4,172 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vishv Modi | Video Editor & Designer</title>
-    <meta name="description" content="Portfolio of Vishv Modi - Professional Video Editor & Thumbnail Designer.">
+    <meta name="description" content="Portfolio of Vishv Modi - Professional Video Editor and Thumbnail Designer.">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <style>
-        /* CUSTOM SCROLLBAR */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: #dc2626; border-radius: 10px; }
 
-        /* BASE STYLES */
-        * { cursor: default; }
-        a, button, [onclick] { cursor: pointer !important; }
-        
-        img, video { pointer-events: none; -webkit-user-drag: none; }
-        body { background-color: #000; color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        .heading-font { font-family: 'Archivo Black', sans-serif; }
-        
-        /* CYBERCUT CLIPPING */
-        .cyber-cut { clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px); }
-        .cyber-button { 
-            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%); 
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        #lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 100;
             align-items: center;
             justify-content: center;
-            height: 80px;
-            width: 100%;
-            font-weight: 900;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
         }
-        
-        /* BACKGROUND MESH */
-        .grid-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-        .grid-mesh { position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background-image: linear-gradient(to right, rgba(220, 38, 38, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(220, 38, 38, 0.05) 1px, transparent 1px); background-size: 50px 50px; transform: rotateX(50deg); animation: moveMesh 20s linear infinite; }
-        @keyframes moveMesh { from { transform: rotateX(50deg) translateY(0); } to { transform: rotateX(50deg) translateY(50px); } }
-
-        /* REVEAL ANIMATION */
-        .reveal { opacity: 0; transform: translateY(30px); }
-        #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 100; align-items: center; justify-content: center; backdrop-filter: blur(20px); }
     </style>
 </head>
+
 <body>
 
-    <div class="grid-container"><div class="grid-mesh"></div></div>
+<!-- NAVBAR -->
+<nav class="fixed w-full z-50 bg-white/80 backdrop-blur border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
+        <span class="font-semibold">Vishv Modi</span>
 
-    <div id="lightbox" onclick="closeLightbox()">
-        <img id="lightbox-img" src="" class="cyber-cut max-w-[85%] max-height-[80%] border border-red-600/30 shadow-2xl">
+        <div class="hidden md:flex gap-8 text-sm text-slate-600">
+            <button onclick="scrollToSection('#work')" class="hover:text-slate-900">Work</button>
+            <button onclick="scrollToSection('#thumbnails')" class="hover:text-slate-900">Thumbnails</button>
+            <button onclick="scrollToSection('#contact')" class="text-indigo-600 font-medium">Contact</button>
+        </div>
     </div>
+</nav>
 
-    <nav class="fixed w-full z-50 px-8 py-6 flex justify-between items-center backdrop-blur-md border-b border-red-900/10">
-        <button onclick="scrollToSection('#top')" class="p-2 bg-red-600/10 border border-red-600/20 hover:bg-red-600 hover:text-white transition-all duration-300 cyber-cut flex items-center justify-center group">
-            <i data-lucide="home" class="w-6 h-6 text-red-600 group-hover:text-white transition-colors"></i>
-        </button>
-        <div class="hidden md:flex gap-8 text-[10px] tracking-[0.3em] font-bold uppercase">
-            <button onclick="scrollToSection('#work')" class="hover:text-red-600 transition">Process</button>
-            <button onclick="scrollToSection('#thumbnails')" class="hover:text-red-600 transition">Thumbnails</button>
-            <button onclick="scrollToSection('#contact')" class="text-red-600">Hire Me</button>
+<!-- HERO -->
+<header id="top" class="min-h-screen flex items-center pt-24">
+    <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-16 items-center">
+
+        <div class="reveal">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                Video Editor &<br>Thumbnail Designer
+            </h1>
+
+            <p class="text-slate-600 max-w-md mb-10">
+                I help creators and brands improve their videos with clean editing and strong thumbnails.
+            </p>
+
+            <button onclick="scrollToSection('#contact')" class="px-8 py-4 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                Start a Project
+            </button>
         </div>
-    </nav>
 
-    <header id="top" class="min-h-screen flex items-center px-8 lg:px-24">
-        <div class="container mx-auto grid lg:grid-cols-12 gap-12 items-center">
-            <div class="lg:col-span-5 order-2 lg:order-1 reveal">
-                <div class="cyber-cut bg-red-600 p-[1px]">
-                    <div class="cyber-cut bg-black overflow-hidden aspect-[4/5]">
-                        <img src="hero.jpeg" alt="Vishv Modi" class="w-full h-full object-cover">
-                    </div>
-                </div>
-            </div>
-            <div class="lg:col-span-7 order-1 lg:order-2">
-                <h1 class="heading-font text-6xl lg:text-9xl leading-none mb-6 uppercase">
-                    VISUAL <br> <span class="text-red-600">EDITOR.</span>
-                </h1>
-                <p class="text-gray-400 text-lg max-w-lg mb-10 leading-relaxed uppercase tracking-tighter">
-                    Crafting high-octane gaming edits and viral thumbnails for the next generation of creators.
-                </p>
-                <button onclick="scrollToSection('#contact')" class="cyber-button bg-red-600 text-white font-black px-10 py-5 tracking-widest uppercase hover:bg-white hover:text-black">
-                    Start Project
-                </button>
-            </div>
+        <div class="reveal">
+            <img src="hero.jpeg" alt="Vishv Modi" class="rounded-2xl w-full max-w-md mx-auto">
         </div>
-    </header>
 
-    <section id="work" class="py-32 px-8 reveal">
-        <div class="container mx-auto max-w-6xl">
-            <div class="mb-12 border-l-4 border-red-600 pl-6">
-                <p class="text-red-600 tracking-widest text-xs uppercase mb-2">Process Showcase</p>
-                <h2 class="heading-font text-4xl uppercase">Before vs After</h2>
+    </div>
+</header>
+
+<!-- WORK -->
+<section id="work" class="py-32">
+    <div class="max-w-7xl mx-auto px-8">
+        <h2 class="text-3xl font-semibold mb-12">Editing Example</h2>
+
+        <div class="grid md:grid-cols-2 gap-8">
+
+            <div class="rounded-xl overflow-hidden bg-slate-100 border">
+                <p class="px-4 py-2 text-sm font-medium text-slate-700">Before</p>
+                <video autoplay muted loop playsinline class="w-full">
+                    <source src="before.mp4" type="video/mp4">
+                </video>
             </div>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="relative group">
-                    <div class="absolute top-4 left-4 z-10 bg-black/80 px-4 py-1 text-xs font-bold tracking-widest uppercase border border-white/20">Raw Footage</div>
-                    <div class="cyber-cut bg-zinc-900 overflow-hidden aspect-video">
-                        <video class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" autoplay muted loop playsinline>
-                            <source src="before.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
-                <div class="relative group">
-                    <div class="absolute top-4 left-4 z-10 bg-red-600 px-4 py-1 text-xs font-bold tracking-widest uppercase shadow-lg">Final Edit</div>
-                    <div class="cyber-cut bg-zinc-900 overflow-hidden aspect-video border border-red-600/30">
-                        <video class="w-full h-full object-cover" autoplay muted loop playsinline>
-                            <source src="after.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
+
+            <div class="rounded-xl overflow-hidden border">
+                <p class="px-4 py-2 bg-indigo-600 text-white text-sm font-medium">After</p>
+                <video autoplay muted loop playsinline class="w-full">
+                    <source src="after.mp4" type="video/mp4">
+                </video>
             </div>
-        </div>
-    </section>
-
-    <section id="thumbnails" class="py-32 px-8 reveal">
-        <div class="container mx-auto max-w-6xl text-center">
-            <h2 class="heading-font text-3xl mb-16 uppercase italic border-b border-red-600 pb-4 inline-block">Visual Identity</h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="cyber-cut overflow-hidden group relative" onclick="openLightbox('thumb1.jpg')">
-                    <img src="thumb1.jpg" class="w-full aspect-video object-cover transition duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-red-600/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                        <i data-lucide="maximize" class="text-white"></i>
-                    </div>
-                </div>
-                <div class="cyber-cut overflow-hidden group relative" onclick="openLightbox('thumb2.jpg')">
-                    <img src="thumb2.jpg" class="w-full aspect-video object-cover transition duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-red-600/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                        <i data-lucide="maximize" class="text-white"></i>
-                    </div>
-                </div>
-                <div class="cyber-cut overflow-hidden group relative" onclick="openLightbox('thumb3.jpg')">
-                    <img src="thumb3.jpg" class="w-full aspect-video object-cover transition duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-red-600/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                        <i data-lucide="maximize" class="text-white"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="py-40 px-8 text-center reveal">
-        <h2 class="heading-font text-5xl md:text-8xl mb-12 uppercase">GET IN <br> TOUCH</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto px-4">
-            
-            <a href="mailto:mvishv6@gmail.com" class="cyber-button bg-white text-black hover:bg-red-600 hover:text-white">
-                GMAIL
-            </a>
-
-            <a href="http://www.fiverr.com/s/1qZZbz0" target="_blank" class="cyber-button bg-[#1dbf73] text-black border-2 border-[#1dbf73] hover:bg-black hover:text-white hover:shadow-[0_0_20px_rgba(29,191,115,0.5)]">
-                FIVERR
-            </a>
-
-            <a href="https://www.instagram.com/vishv_playz" target="_blank" class="cyber-button bg-red-600 text-white hover:bg-white hover:text-black">
-                INSTAGRAM
-            </a>
 
         </div>
-    </section>
+    </div>
+</section>
 
-    <script>
-        lucide.createIcons();
-        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+<!-- THUMBNAILS -->
+<section id="thumbnails" class="py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-8 text-center">
+        <h2 class="text-3xl font-semibold mb-16">Thumbnail Work</h2>
 
-        // SCROLL REVEAL ANIMATIONS
-        gsap.utils.toArray(".reveal").forEach(el => {
-            gsap.to(el, { scrollTrigger: { trigger: el, start: "top 90%" }, opacity: 1, y: 0, duration: 1, ease: "power2.out" });
+        <div class="grid md:grid-cols-3 gap-8">
+            <img src="thumb1.jpg" onclick="openLightbox('thumb1.jpg')" class="rounded-xl border cursor-pointer hover:scale-[1.02] transition">
+            <img src="thumb2.jpg" onclick="openLightbox('thumb2.jpg')" class="rounded-xl border cursor-pointer hover:scale-[1.02] transition">
+            <img src="thumb3.jpg" onclick="openLightbox('thumb3.jpg')" class="rounded-xl border cursor-pointer hover:scale-[1.02] transition">
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-32 text-center">
+    <h2 class="text-4xl font-bold mb-10">Contact Me</h2>
+
+    <div class="flex flex-col md:flex-row gap-6 justify-center">
+        <a href="mailto:mvishv6@gmail.com" class="px-8 py-4 border rounded-lg hover:bg-slate-100">
+            Email
+        </a>
+
+        <a href="http://www.fiverr.com/s/1qZZbz0" target="_blank"
+           class="px-8 py-4 bg-green-600 text-white rounded-lg hover:bg-green-700">
+            Fiverr
+        </a>
+
+        <!-- UPDATED INSTAGRAM URL -->
+        <a href="https://www.instagram.com/vishvsfx?igsh=aTI1d2IzMmxxbGR4" target="_blank"
+           class="px-8 py-4 bg-slate-900 text-white rounded-lg hover:bg-slate-800">
+            Instagram
+        </a>
+    </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()" class="flex">
+    <img id="lightbox-img" class="max-w-[90%] max-h-[90%] rounded-xl">
+</div>
+
+<script>
+    lucide.createIcons();
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+    gsap.utils.toArray(".reveal").forEach(el => {
+        gsap.to(el, {
+            scrollTrigger: { trigger: el, start: "top 85%" },
+            opacity: 1,
+            y: 0,
+            duration: 0.8
         });
+    });
 
-        function scrollToSection(id) { gsap.to(window, { duration: 1, scrollTo: id, ease: "power4.inOut" }); }
-        function openLightbox(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').style.display = 'flex'; }
-        function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
-    </script>
+    function scrollToSection(id) {
+        gsap.to(window, { duration: 1, scrollTo: id });
+    }
+
+    function openLightbox(src) {
+        document.getElementById('lightbox-img').src = src;
+        document.getElementById('lightbox').style.display = 'flex';
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').style.display = 'none';
+    }
+</script>
+
 </body>
 </html>
-
-
