@@ -32,7 +32,6 @@ nav {
     display: flex;
     justify-content: space-between;
     z-index: 1000;
-
     background: rgba(0,0,0,0.3);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
@@ -212,7 +211,7 @@ section {
     font-size: 1.2rem;
 }
 
-/* VIDEO SECTION (FIXED PROPERLY) */
+/* VIDEO SECTION */
 .videos {
     text-align: center;
 }
@@ -237,14 +236,12 @@ section {
     box-shadow: 0 0 25px var(--glow);
 }
 
-/* LANDSCAPE VIDEO */
 .video-card.landscape video {
     width: 500px;
     aspect-ratio: 16 / 9;
     border-radius: 10px;
 }
 
-/* PORTRAIT VIDEO */
 .video-card.portrait video {
     width: 250px;
     aspect-ratio: 9 / 16;
@@ -277,6 +274,67 @@ section {
     margin-bottom: 20px;
 }
 
+/* CONTACT LINKS FIXED */
+.contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+/* BASE CARD */
+.contact-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 15px 25px;
+    border-radius: 15px;
+
+    background: var(--glass);
+    border: 1px solid var(--border);
+
+    text-decoration: none;
+    color: white;
+
+    transition: 0.3s;
+}
+
+.contact-card i {
+    width: 20px;
+    height: 20px;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px var(--glow);
+}
+
+/* FORCE EMAIL TO NEXT LINE CENTER */
+.contact-card.email {
+    flex: 0 0 100%;
+    max-width: 200px;
+    justify-content: center;
+}
+
+/* INSTAGRAM */
+.contact-card.instagram:hover {
+    background: linear-gradient(45deg, #ff0050, #ff8a00);
+}
+
+/* WHATSAPP */
+.contact-card.whatsapp:hover {
+    background: #25D366;
+    color: black;
+}
+
+/* EMAIL */
+.contact-card.email:hover {
+    background: white;
+    color: black;
+}
+
 /* MOBILE */
 @media (max-width: 768px) {
     .about {
@@ -298,55 +356,4 @@ section {
     .video-card.portrait video {
         width: 60%;
     }
-}
-
-/* CONTACT LINKS */
-.contact-links {
-    display: flex;
-    gap: 25px;
-    margin-top: 30px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-/* CARD STYLE */
-.contact-card {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    padding: 15px 25px;
-    border-radius: 15px;
-
-    background: var(--glass);
-    border: 1px solid var(--border);
-
-    text-decoration: none;
-    color: white;
-
-    transition: 0.3s;
-}
-
-/* ICON SIZE */
-.contact-card i {
-    width: 20px;
-    height: 20px;
-}
-
-/* HOVER EFFECT */
-.contact-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 20px var(--glow);
-}
-
-/* INSTAGRAM COLOR */
-.contact-card.instagram:hover {
-    background: linear-gradient(45deg, #ff0050, #ff8a00);
-    color: white;
-}
-
-/* WHATSAPP COLOR */
-.contact-card.whatsapp:hover {
-    background: #25D366;
-    color: black;
 }
