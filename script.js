@@ -9,3 +9,5 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
         });
     });
 });
+
+lucide.createIcons();
