@@ -218,17 +218,14 @@ section {
 
 .video-grid {
     display: flex;
-    justify-content: center;
+    flex-direction: column;   /* 🔥 THIS is the key */
+    align-items: center;
     gap: 40px;
-    flex-wrap: wrap;
 }
 
 .video-card {
-    background: var(--glass);
-    border-radius: 15px;
-    padding: 15px;
-    border: 1px solid var(--border);
-    transition: 0.3s;
+    width: 100%;
+    max-width: 600px;  /* controls overall size */
 }
 
 .video-card:hover {
